@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.map
 import com.example.joespizza.R
 import com.example.joespizza.data.IngredientDataRepository
+import com.example.joespizza.domain.DoughRecipeUseCase
 import com.example.joespizza.domain.GarlicBreadRecipeUseCase
 import com.example.joespizza.domain.PizzaRecipeUseCase
 
@@ -38,8 +39,10 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = getViewModel()
 
-        viewModel.state.map { it.canMakePizza }.observe(viewLifecycleOwner, Observer(this::bindPizza))
-        viewModel.state.map { it.canMakeGarlicBread }.observe(viewLifecycleOwner, Observer(this::bindGarlicBread))
+        viewModel.state.map { it.canMakePizza }
+            .observe(viewLifecycleOwner, Observer(this::bindPizza))
+        viewModel.state.map { it.canMakeGarlicBread }
+            .observe(viewLifecycleOwner, Observer(this::bindGarlicBread))
 
     }
 
@@ -53,10 +56,11 @@ class MainFragment : Fragment() {
 
     private fun getViewModel(): MainViewModel {
         val ingredientRepository = IngredientDataRepository()
+        val doughRecipeUseCase = DoughRecipeUseCase(ingredientRepository)
 
         return MainViewModel(
-            PizzaRecipeUseCase(ingredientRepository),
-            GarlicBreadRecipeUseCase(ingredientRepository)
+            PizzaRecipeUseCase(ingredientRepository, doughRecipeUseCase),
+            GarlicBreadRecipeUseCase(ingredientRepository, doughRecipeUseCase)
         )
     }
 

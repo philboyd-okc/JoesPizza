@@ -4,14 +4,12 @@ import com.example.joespizza.data.Ingredient
 import com.example.joespizza.data.IngredientRepository
 
 class GarlicBreadRecipeUseCase(
-    private val ingredientRepository: IngredientRepository
+    private val ingredientRepository: IngredientRepository,
+    private val doughRecipeUseCase: DoughRecipeUseCase
 ) {
 
     fun canMake(): Boolean {
-        return ingredientRepository.getIngredientQuantity(Ingredient.FLOUR) > 0 &&
-                ingredientRepository.getIngredientQuantity(Ingredient.WATER) > 0 &&
-                ingredientRepository.getIngredientQuantity(Ingredient.YEAST) > 0 &&
-                ingredientRepository.getIngredientQuantity(Ingredient.SALT) > 0 &&
+        return doughRecipeUseCase.canMake() &&
                 ingredientRepository.getIngredientQuantity(Ingredient.GARLIC) > 0
     }
 }
