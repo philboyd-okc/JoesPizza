@@ -3,7 +3,7 @@ package com.example.joespizza.domain
 import com.example.joespizza.data.Ingredient
 import com.example.joespizza.data.IngredientRepository
 
-class PizzaRecipeUseCase(
+class GarlicBreadRecipeUseCase(
     private val ingredientRepository: IngredientRepository
 ) {
 
@@ -12,8 +12,6 @@ class PizzaRecipeUseCase(
                 ingredientRepository.getIngredientQuantity(Ingredient.WATER) > 0 &&
                 ingredientRepository.getIngredientQuantity(Ingredient.YEAST) > 0 &&
                 ingredientRepository.getIngredientQuantity(Ingredient.SALT) > 0 &&
-                ingredientRepository.getIngredientQuantity(Ingredient.MOZZARELLA) > 0 &&
-                ingredientRepository.getIngredientQuantity(Ingredient.BASIL) > 0 &&
-                ingredientRepository.getIngredientQuantity(Ingredient.TOMATO) > 0
+                ingredientRepository.getIngredientQuantity(Ingredient.GARLIC) > 0
     }
 }

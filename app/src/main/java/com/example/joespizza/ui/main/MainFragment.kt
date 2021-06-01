@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import androidx.lifecycle.map
 import com.example.joespizza.R
 import com.example.joespizza.data.IngredientDataRepository
+import com.example.joespizza.domain.GarlicBreadRecipeUseCase
 import com.example.joespizza.domain.PizzaRecipeUseCase
 
 class MainFragment : Fragment() {
@@ -34,14 +36,28 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = MainViewModel(PizzaRecipeUseCase(IngredientDataRepository()))
+        viewModel = getViewModel()
 
-        viewModel.state.observe(viewLifecycleOwner, Observer(this::bindState))
+        viewModel.state.map { it.canMakePizza }.observe(viewLifecycleOwner, Observer(this::bindPizza))
+        viewModel.state.map { it.canMakeGarlicBread }.observe(viewLifecycleOwner, Observer(this::bindGarlicBread))
 
     }
 
-    private fun bindState(canMakePizza: Boolean) {
+    private fun bindPizza(canMakePizza: Boolean) {
         textView.text = if (canMakePizza) "Can Make Pizza" else "Cannot Make Pizza :("
+    }
+
+    private fun bindGarlicBread(canMakeGarlicBread: Boolean) {
+        // textView.text = if (canMakeGarlicBread) "Can Make Garlic Bread" else "Cannot Make Garlic Bread :("
+    }
+
+    private fun getViewModel(): MainViewModel {
+        val ingredientRepository = IngredientDataRepository()
+
+        return MainViewModel(
+            PizzaRecipeUseCase(ingredientRepository),
+            GarlicBreadRecipeUseCase(ingredientRepository)
+        )
     }
 
 }

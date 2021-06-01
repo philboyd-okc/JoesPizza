@@ -7,5 +7,6 @@ enum class Ingredient {
     YEAST,
     TOMATO,
     MOZZARELLA,
-    BASIL
+    BASIL,
+    GARLIC
 }
