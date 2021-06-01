@@ -6,7 +6,7 @@ interface IngredientRepository {
 
 class IngredientDataRepository : IngredientRepository {
 
-    private val randomNumbers = (0..10)
+    private val randomNumbers = (1..10)
 
     override fun getIngredientQuantity(ingredient: Ingredient): Int {
         return randomNumbers.random()
