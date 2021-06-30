@@ -31,4 +31,4 @@ jobs:
         uses: wyozi/contextual-qa-checklist-action@1.2
         with:
           gh-token: ${{ secrets.GITHUB_TOKEN }}
-          input-file: ./app/CHECKLIST.yml
+          input-file: app/CHECKLIST.yml
