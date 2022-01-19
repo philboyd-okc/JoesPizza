@@ -13,5 +13,5 @@ jobs:
       - uses: andrefcdias/add-to-milestone@v1.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          use-pattern: true
+          use-expression: true
           milestone: "*.*.0"
