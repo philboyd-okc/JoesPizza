@@ -2,7 +2,7 @@ name: Add Milestone
 on:
   pull_request:
     types: [closed]
-    branches: [main]
+    branches: [*]
 jobs:
   adds:
     runs-on: ubuntu-latest
