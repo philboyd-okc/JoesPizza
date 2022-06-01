@@ -1,5 +1,8 @@
 paths:
-  "CHECKLIST.yml":
+  "app/CHECKLIST.yml":
     - Is everything spelt correctly?
     - Touch
+    - touch
+    - touch
+    - touch
     - touch
